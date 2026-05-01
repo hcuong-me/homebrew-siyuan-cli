@@ -1,22 +1,26 @@
 class SiyuanCli < Formula
   desc "CLI for SiYuan Note"
   homepage "https://github.com/hcuong-me/siyuan-cli"
-  version "0.0.1"
+  version "0.0.2"
 
   on_macos do
     on_arm do
-      url "https://github.com/hcuong-me/siyuan-cli/releases/download/v0.0.1/siyuan-darwin-arm64"
-      sha256 "ce0ff11a7242155173ac41083914d08f2a4f827dda2230d6401f4e9cc072e7a7"
+      url "https://github.com/hcuong-me/siyuan-cli/releases/download/v0.0.2/siyuan-darwin-arm64"
+      sha256 "4ea87b63d42a563801b6da211568b82df957ae4e30994942750c0772a17a14e2"
     end
 
     on_intel do
-      url "https://github.com/hcuong-me/siyuan-cli/releases/download/v0.0.1/siyuan-darwin-amd64"
-      sha256 "ef1570bb8ee5826635e22f60dfcc3c28f84a6b73b007bcef11e1da43b5620049"
+      url "https://github.com/hcuong-me/siyuan-cli/releases/download/v0.0.2/siyuan-darwin-amd64"
+      sha256 "273e57bcc4901eac41b75fc37c924e266ba400b6beac96d1fe0d641e9a4389e4"
     end
   end
 
   def install
-    bin.install "siyuan" => "siyuan-cli"
+    if Hardware::CPU.arm?
+      bin.install "siyuan-darwin-arm64" => "siyuan-cli"
+    else
+      bin.install "siyuan-darwin-amd64" => "siyuan-cli"
+    end
   end
 
   test do
